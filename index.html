@@ -2,13 +2,20 @@
   <head>
     <!--Load the AJAX API-->
   </head>
+  <title>Sam's Stock App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="styles.css">
 
-<h1>What's in your Stock Portfolio App</h1>
+<div class="jumbotron"style="text-align:center">
+  <h1>What's in your Stock Portfolio</h1>
+  <p><a class="btn btn-primary btn-lg" href="https://docs.google.com/spreadsheets/d/1AGw9ICpGoyBL0qz0zWhEAeR3MfXUEvX4MEEnH7HAzO8/edit#gid=0" TARGET="_blank" role="button">Update Portfolio</a></p>
+
+</div>
   <body>
     <!--Div that will hold the pie chart-->
+
     <div class="container"></div>
     <div id="chart_div"></div>
-
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="js/tabletop.js"></script>
@@ -39,7 +46,8 @@
           return obj;
         })
 
-
+        //need to change to make compatible with GoogleCharts
+        //connect GoogleChart to this func.
         drawChart(doubles);
 
                   // var myOrder = new Array;
@@ -73,14 +81,19 @@
         data.addRows(dataStuff);
 
         // Set chart options
-        var options = {'title':'Stock Ownership',
-                       'width':800,
-                       'height':800,
-                     colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+        //Currently can only handle 5 stocks
+        //in future work to expan beyond 5, see what the adding of more colors can do
+        //changing is3D to true maks pie chart 3d set to false to make flat
+        var options = {'title':'Stock Portfolio',
+                       'width':1000,
+                       'height':1000,
+                     colors: ['#778899', '#FF4500', '#800000', '#0000FF', '#f6c7b6'],
   is3D: true};
 
         // Instantiate and draw our chart, passing in some options.
+        //if we want to use another chart change this section below to something else besides PieChart
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        //creates chart based on var options above and google data from sheet.
         chart.draw(data, options);
       }
     </script>
